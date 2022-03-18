@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilatu Bezeroa</title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+      
+        .logo{
+            margin: 2%;
+        }
+        #cajas{
+            margin: 1%;
+        }
+        
+        .guardar{
+            width: 9%;
+            background-color: yellow;
+            color: black;
+            border-radius: 25px;
+        }
+        .salida{
+            margin: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    
+    
+    <div id="cajas">
+        <h2>Bezeroaren Nan zenbakia</h2><input type="text" id="nan" ><br><br>
+        
+        <!--<h2>Abizena</h2><input type="text" id="abizena" >
+        <h2>NAN</h2><input type="text" id="nan" >
+        <h2>Emaila</h2><input type="text" id="emaila" >
+        <h2>Telefonoa</h2><input type="text" id="telefonoa" >
+        <h2>Pasahitza</h2><input type="password" id="pasahitza" >-->
+    
+        
+        <button id="bilatu" class="guardar"><br><b><h3>Bezeroaren datuak bilatu</h3></b><br></button>
+        
+        
+    </div>
+    <script>
+        document.getElementById("bilatu").addEventListener("click",bilatu);
+        
+        function bilatu(){
+       
+            var xhr = new XMLHttpRequest();
+            let nan = document.getElementById("nan").value;
+            xhr.onreadystatechange = function()
+            {
+                if (xhr.readyState == 4 && xhr.status == 200){  
+                    var datua = JSON.parse(xhr.responseText);
+                    let nan = datua[0].nan;
+                    let izena = datua[0].izena;
+                    let abizena = datua[0].abizena;
+                    let helbidea = datua[0].helbidea;
+                    let herria = datua[0].herria;
+                    let posta_kodea = datua[0].posta_kodea;
+                    let probintzia = datua[0].probintzia;
+                    let emaila = datua[0].emaila;
+                    let pasahitza = datua[0].pasahitza;
+                    
+                    
+                    document.getElementById("cajas").innerHTML="<h2>Bezeroaren nan-a</h2><input type='text' id='nan' ><h2>Izena</h2><input type='text' id='izena' ><h2>Abizena</h2><input type='text' id='abizena' ><h2>Helbidea</h2><input type='text' id='helbidea' ><h2>herria</h2><input type='text' id='herria' ><h2>posta_kodea</h2><input type='text' id='posta_kodea' ><h2>probintzia</h2><input type='text' id='probintzia' ><h2>emaila</h2><input type='text' id='emaila' ><h2>pasahitza</h2><input type='text' id='pasahitza' ><br><br><button id='bilatu' class='guardar'><br><b><h3>Bezeroaren datuak bilatu</h3></b><br></button>";
+                    
+
+                    document.getElementById("nan").value=nan;
+                    document.getElementById("izena").value=izena;
+                    document.getElementById("abizena").value=abizena;
+                    document.getElementById("helbidea").value=helbidea;
+                    document.getElementById("herria").value=herria;
+                    document.getElementById("posta_kodea").value=posta_kodea;
+                    document.getElementById("probintzia").value=probintzia;
+                    document.getElementById("emaila").value=emaila;
+                    document.getElementById("pasahitza").value=pasahitza;
+                    
+                }
+            }
+
+            xhr.open("GET", "select_1_bezeroak.php?nan="+nan, true);
+            xhr.send();
+
+            
+
+        }
+        
+    </script>
+</body>
+
+</html>

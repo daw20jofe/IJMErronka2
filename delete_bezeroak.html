@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilatu Bezeroa</title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+      
+        .logo{
+            margin: 2%;
+        }
+        #cajas{
+            margin: 1%;
+        }
+        
+        .guardar{
+            width: 9%;
+            background-color: yellow;
+            color: black;
+            border-radius: 25px;
+        }
+        .salida{
+            margin: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    
+    
+    <div id="cajas">
+        <h2>Zure identifikadorea</h2><input type="text" id="id_bezeroak" ><br><br>
+        
+        <!--<h2>Abizena</h2><input type="text" id="abizena" >
+        <h2>NAN</h2><input type="text" id="nan" >
+        <h2>Emaila</h2><input type="text" id="emaila" >
+        <h2>Telefonoa</h2><input type="text" id="telefonoa" >
+        <h2>Pasahitza</h2><input type="password" id="pasahitza" >-->
+    
+        
+        <button id="bilatu" class="guardar"><br><b><h3>Bezeroaren datuak bilatu</h3></b><br></button>
+        
+        
+    </div>
+    <script>
+        document.getElementById("bilatu").addEventListener("click",bilatu);
+        
+        function bilatu(){
+            
+            var xhr = new XMLHttpRequest();
+            let id_bezeroak = document.getElementById("id_bezeroak").value;
+            xhr.onreadystatechange = function()
+            {
+                if (xhr.readyState == 4 && xhr.status == 200){  
+                    var datua = JSON.parse(xhr.responseText);
+                    let id_bezeroak= datua[0].id_bezeroak;
+                    let izena = datua[0].izena;
+                    let abizena = datua[0].abizena;
+                    let nan = datua[0].nan;
+                    let emaila = datua[0].emaila;
+                    let telefonoa = datua[0].telefonoa;
+                    let pasahitza = datua[0].pasahitza;
+                    
+                    
+                    document.getElementById("cajas").innerHTML="<h2>Id-a</h2><input type='text' id='id_bezeroak' ><h2>Izena</h2><input type='text' id='izena' ><h2>Abizena</h2><input type='text' id='abizena' ><h2>NAN</h2><input type='text' id='nan' ><h2>Emaila</h2><input type='text' id='emaila' ><h2>Telefonoa</h2><input type='text' id='telefonoa' ><h2>Pasahitza</h2><input type='password' id='pasahitza' ><br><br><button id='bilatu' class='guardar'><br><b><h3>Bezeroaren datuak bilatu</h3></b><br></button><button id='ezabatu' class='guardar'><br><b><h3>Bezeroa ezabatu</h3></b><br></button>";
+                    document.getElementById("ezabatu").addEventListener("click",ezabatu);
+                    
+
+                    document.getElementById("id_bezeroak").value=id_bezeroak;
+                    document.getElementById("izena").value=izena;
+                    document.getElementById("abizena").value=abizena;
+                    document.getElementById("nan").value=nan;
+                    document.getElementById("emaila").value=emaila;
+                    document.getElementById("telefonoa").value=telefonoa;
+                    document.getElementById("pasahitza").value=pasahitza;
+                    
+                }
+            }
+
+            xhr.open("GET", "select_1_bezeroak.php?id_bezeroak="+id_bezeroak, true);
+            xhr.send();
+
+            
+
+        }
+
+        function ezabatu(){
+       var xhr = new XMLHttpRequest();
+       let id_bezeroak = document.getElementById("id_bezeroak").value;
+       xhr.onreadystatechange = function()
+       {
+          // alert(xhr.responseText)  
+           if (xhr.readyState == 4 && xhr.status == 200){
+               
+           }
+       }
+
+       xhr.open("GET", "delete_bezeroak.php?id_bezeroak="+id_bezeroak, true);
+       xhr.send();
+
+       
+
+   }
+        
+    </script>
+</body>
+
+</html>

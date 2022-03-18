@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .cssbuttons-io-button {
+ background: #ffffff;
+ color: black;
+ font-family: inherit;
+ padding: 0.35em;
+ padding-left: 1.2em;
+ font-size: 17px;
+ font-weight: 500;
+ border-radius: 0.9em;
+ border: none;
+ letter-spacing: 0.05em;
+ display: flex;
+ align-items: center;
+ box-shadow: inset 0 0 1.6em -0.6em #000000;
+ overflow: hidden;
+ position: relative;
+ height: 2.8em;
+ padding-right: 3.3em;
+}
+
+.cssbuttons-io-button .icon {
+ background: rgb(0, 0, 0);
+ margin-left: 1em;
+ position: absolute;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 2.2em;
+ width: 2.2em;
+ border-radius: 0.7em;
+ box-shadow: 0.1em 0.1em 0.6em 0.2em #000000;
+ right: 0.3em;
+ transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+ width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+ width: 1.1em;
+ transition: transform 0.3s;
+ color: #ffffff;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+ transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+ transform: scale(0.95);
+}
+    </style>
+  <meta charset="utf-8">
+  <head>
+      <title>Produktu guztiak</title>
+  </head>
+  <style>
+      table{
+          width: 100%;
+      }
+      table, th, td {
+          
+        font-family: 'Nunito', sans-serif;
+        text-transform:uppercase;
+        line-height: 40px;
+        font-weight: 900;
+        font-size:15px;
+        text-decoration:none;
+  border: 1px solid rgba(255, 255, 255, 0.404);
+  border-collapse: collapse;
+  color: white;
+  text-align: center;
+}
+th, td {
+  background-color: rgba(0, 0, 0, 0.466);
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 19px;
+  text-align: center;
+}
+div button{
+    margin-top: 10px;
+    
+    font-family: 'Nunito', sans-serif;
+        text-transform:uppercase;
+        line-height: 40px;
+        font-weight: 900;
+        font-size:15px;
+        text-decoration:none;
+        border-radius: 25px;
+}
+  </style>
+  <body>
+      <script>
+
+function erakutsi(){
+      
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+        
+          if (xhr.readyState == 4 && xhr.status == 200)
+          {
+              var array = new Array();
+              array = JSON.parse(xhr.responseText);
+             
+              var txt="<table style='margin-top:25px;align:center;'><tr><th>ID</th><th>IZENBURUA</th> <th>MOTA</th> <th>PREZIOA</th> <th>DESKRIBAPENA</th> <th>TALLA</th> <th>STOCK</th></tr>";//string , karaktere kate bat
+              for (var x=0;x<array.length;x++)
+              {
+                  txt += "<tr><td>"+array[x].id+"</td><td>"+array[x].izenburua+"</td><td>"+array[x].mota+"</td><td>"+array[x].prezioa+"</td><td>"+array[x].deskribapena+"</td><td>"+array[x].talla+"</td><td>"+array[x].stock + "</td></tr>";
+  
+                 
+              } 
+              txt += "</table>";
+              document.getElementById("texto").innerHTML = txt;
+          }
+      };
+          xhr.open("GET", "select_produktuak.php", true);
+          xhr.send();
+      }
+
+      </script>
+
+      <div style="margin-left: 520px;">
+
+        <button id="Enviar" onclick="erakutsi()" type="button" class="text">ERAKUTSI PRODUKTUAK</button>
+
+      </div>
+
+      <div id="texto"></div>
+<div style="text-align: center; margin-left: 520px; margin-top: 100px ;">
+    <a style="color: #000000; text-decoration: none;" href="insert_produktuak.html"><button class="cssbuttons-io-button"> Berria<div class="icon"><svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg></a>
+    <a style="color: #000000; text-decoration: none;" href="select_1_produktuak.html"><button class="cssbuttons-io-button"> Aldatu<div class="icon"><svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg></a>
+    <a style="color: #000000; text-decoration: none;" href="delete_produktuak.html"><button class="cssbuttons-io-button"> Ezabatu<div class="icon"><svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg></a>
+  </div>
+</body>
